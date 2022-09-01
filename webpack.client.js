@@ -12,23 +12,22 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.[jt]sx?$/,
-                exclude: /node_modules/,
-                use: { loader: "babel-loader" }
+                test: /\.png$/,
+                type: "asset/resource",
+                generator: { outputPath: "imgs", publicPath: "/static/imgs/" }
             },
             {
                 test: /\.s[ac]ss$/,
                 use: [
-                    "style-loader",
-                    {loader: MiniCssExtractPlugin.loader, options: {esModule: false}},
+                    {loader: MiniCssExtractPlugin.loader},
                     "css-loader",
                     "sass-loader"
                 ]
             },
             {
-                test: /\.png$/,
-                type: "asset/resource",
-                generator: { outputPath: "imgs", publicPath: "/static/imgs/" }
+                test: /\.[jt]sx?$/,
+                exclude: /node_modules/,
+                use: { loader: "babel-loader" }
             }
         ]
     },
@@ -36,6 +35,6 @@ module.exports = {
         new MiniCssExtractPlugin()
     ],
     resolve: {
-        extensions: [".tsx", ".ts"]
+        extensions: [".tsx", ".ts", ".js"]
     }
 }
