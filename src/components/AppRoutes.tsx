@@ -9,8 +9,8 @@ export default function AppRoutes() {
         <BrowserRouter>
             <Routes>
                 <Route path={"/"} element={<Search/>}>
-                    <Route path={"items"} element={<PLP/>}/>
                     <Route path={"items/:id"} element={<PDP/>} />
+                    <Route path={"/items"} element={<PLP/>} />
                 </Route>
             </Routes>
         </BrowserRouter>
