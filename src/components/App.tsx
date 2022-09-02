@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.scss';
 import AppRoutes from "./AppRoutes";
 import {Provider} from "react-redux";
 import store from "../store/Store";
