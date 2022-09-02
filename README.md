@@ -6,7 +6,7 @@ In the project directory, you can run:
 
 Builds the app to the `dist` folder.\
 
-### `npm start`
+### `npm run start`
 
 Runs the app.\
 Requires `npm run build` to be run before.
