@@ -6,7 +6,7 @@ interface Author {
 interface ItemsResponse {
     author: Author;
     categories: string[];
-    items: Item[];
+    items: (Item & { city_name: string })[];
 }
 
 interface ItemResponse {
@@ -27,4 +27,5 @@ interface Item {
     picture: string;
     condition: string;
     free_shipping: boolean;
+    category_id: string;
 }

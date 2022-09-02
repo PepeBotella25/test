@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import {useParams} from "react-router-dom";
 import {useGetItemQuery} from "../../services/Items";
 import ItemDetails from "./ItemDetails";
+import BreadCrumb from "../PLP/BreadCrumb";
 
 export default function Page() {
     const { id } = useParams<{ id: string }>();
@@ -14,6 +15,9 @@ export default function Page() {
     const { item } = data!;
 
     return (
-        <ItemDetails item={item} />
+        <Fragment>
+            <BreadCrumb categoryId={item.category_id}/>
+            <ItemDetails item={item} />
+        </Fragment>
     );
 }

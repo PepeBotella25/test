@@ -1,8 +1,14 @@
+interface Category {
+    id: string;
+    name: string;
+    path_from_root: { id: string; name: string }[]
+}
+
 interface ItemsAPIResponse {
-    results: Omit<ItemAPIResponse, "sold_quantity">[];
-    available_filters: {
+    results: (Omit<ItemAPIResponse, "sold_quantity"> & { address: { city_name: string } })[];
+    filters: {
         id: string;
-        values: { name: string }[]
+        values: Category[]
     }[]
 }
 
@@ -15,6 +21,7 @@ interface ItemAPIResponse {
     price: number;
     currency_id: string;
     sold_quantity: number;
+    category_id: string;
 }
 
 interface ItemDescriptionAPIResponse {

@@ -1,6 +1,5 @@
-import fetch from 'node-fetch';
+import {doRequest} from "./Client";
 
-const baseUrl = "https://api.mercadolibre.com";
 const ITEMS_LIMIT = 4;
 const author: Author = {
     name: "Daniel",
@@ -8,20 +7,23 @@ const author: Author = {
 };
 
 export async function getItems(query: string): Promise<ItemsResponse> {
-    const apiURL = `${baseUrl}/sites/MLA/search?q=${query}&limit=${ITEMS_LIMIT}`;
-    const { results, available_filters } = await doRequest(apiURL) as ItemsAPIResponse;
+    const apiURL = `sites/MLA/search?q=${query}&limit=${ITEMS_LIMIT}`;
+    const { results, filters } = await doRequest(apiURL) as ItemsAPIResponse;
 
-    const categories = available_filters
+    const categories = filters
         .find(({ id }) => id === "category")?.values
-        .map(category => category.name) || [];
+        .map(({ name }) => name) || [];
 
-    const items = results.map(parseItem);
+    const items = results.map(({address, ...result}) => {
+        const item = parseItem(result);
+        return {...item, city_name: address.city_name};
+    });
 
     return { items, author, categories };
 }
 
 export async function getItem(id: string): Promise<ItemResponse> {
-    const apiURL = `${baseUrl}/items/${id}`;
+    const apiURL = `items/${id}`;
     const [item, { plain_text }] = await Promise.all([doRequest(apiURL), doRequest(`${apiURL}/description`)]) as [ItemAPIResponse, ItemDescriptionAPIResponse];
 
     return {
@@ -35,13 +37,14 @@ export async function getItem(id: string): Promise<ItemResponse> {
 }
 
 function parseItem(item: Omit<ItemAPIResponse, "sold_quantity">): Item {
-    const { id, title, condition, thumbnail, currency_id, price, shipping } = item;
+    const { id, title, condition, thumbnail, currency_id, price, shipping, category_id } = item;
     const [amount, decimals] = `${price}`.split(".");
 
     return {
         id,
         title,
         condition,
+        category_id,
         picture: thumbnail,
         free_shipping: shipping.free_shipping,
         price: {
@@ -50,9 +53,4 @@ function parseItem(item: Omit<ItemAPIResponse, "sold_quantity">): Item {
             decimals: +decimals
         }
     };
-}
-
-async function doRequest(url: string) {
-    const response = await fetch(url);
-    return response.json();
 }

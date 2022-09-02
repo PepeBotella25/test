@@ -1,0 +1,27 @@
+@import "../../styles/colors";
+
+.itemCard {
+  font-size: 18px;
+  padding: 16px 16px 16px;
+  border-bottom: 1px solid $light-grey;
+
+  .city {
+    color: $grey;
+    font-size: 12px;
+  }
+}
+
+.itemCardImg {
+  border-radius: 4px;
+  margin-right: 16px;
+}
+
+.itemCardPrice {
+  font-size: 24px;
+  padding-top: 16px;
+  padding-bottom: 32px;
+
+  img {
+    padding-left: 20px;
+  }
+}

@@ -2,6 +2,7 @@ import express, {RequestHandler} from "express";
 import path from "path";
 import framePage from "./framePage.html";
 import {getItem, getItems} from "./api/ItemsApiClient";
+import {getCategory} from "./api/CategoriesApiClient";
 
 const PORT = 3000;
 const app = express();
@@ -26,6 +27,11 @@ router.get("/api/items", async (req, res) => {
 router.get("/api/items/:id", async (req, res) => {
     const { id } = req.params;
     const response = await getItem(id);
+    res.send(response);
+});
+router.get("/api/categories/:id", async (req, res) => {
+    const { id } = req.params;
+    const response = await getCategory(id);
     res.send(response);
 });
 

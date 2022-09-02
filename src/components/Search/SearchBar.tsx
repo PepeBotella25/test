@@ -3,6 +3,8 @@ import LogoImg from "../../imgs/Logo_ML.png";
 import SearchImg from "../../imgs/ic_Search.png";
 import {Link, useNavigate} from "react-router-dom";
 import "./SearchBar.scss";
+import Container from "../ui/Container";
+import Row from "../ui/Row";
 
 export default function SearchBar() {
     const navigate = useNavigate();
@@ -16,12 +18,12 @@ export default function SearchBar() {
     }
 
     return (
-        <div className={"bar"}>
-            <div className={"search"}>
+        <Row className={"bar"}>
+            <Container className={"search"}>
                 <Link to={"/"}><img src={LogoImg} alt={"logo"}/></Link>
                 <input ref={input} type={"text"} placeholder={"Nunca dejes de buscar"}/>
                 <button onClick={onClick}><img src={SearchImg} alt={"Search bar"}/></button>
-            </div>
-        </div>
+            </Container>
+        </Row>
     );
 }
