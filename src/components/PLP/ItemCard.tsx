@@ -12,7 +12,7 @@ interface Props {
 
 export default function ItemCard(props: Props) {
     const { item } = props;
-    const { id, title, picture, price, condition, free_shipping, city_name } = item;
+    const { id, title, picture, price, free_shipping, city_name } = item;
     const { currency, amount, decimals } = price;
 
     const format = getCurrencyFormatter(currency);
@@ -26,8 +26,7 @@ export default function ItemCard(props: Props) {
                         <strong>{format(+[amount, decimals].join("."))}</strong>
                         { free_shipping ? <img src={ShippingImg} alt={"free shipping"} width={"18px"} height={"18px"} /> : <Fragment/>}
                     </Row>
-                    <div>{title}</div>
-                    <div>{condition}</div>
+                    <div className={"title"}>{title}</div>
                 </Column>
                 <div className={"city"}>{city_name}</div>
             </Row>
