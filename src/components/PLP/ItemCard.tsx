@@ -21,7 +21,7 @@ export default function ItemCard(props: Props) {
                 <Column>
                     <Row className={"itemCardPrice"}>
                         <strong>{`${currency} ${amount}${decimals ? "," + decimals : ""}`}</strong>
-                        { free_shipping ? <img src={ShippingImg} alt={"free shipping"} /> : <Fragment/>}
+                        { free_shipping ? <img src={ShippingImg} alt={"free shipping"} width={"18px"} height={"18px"} /> : <Fragment/>}
                     </Row>
                     <div>{title}</div>
                     <div>{condition}</div>
