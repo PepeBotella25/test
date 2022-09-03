@@ -6,7 +6,7 @@ import "./ItemCard.scss";
 import {getCurrencyFormatter} from "../../utils/Utils";
 
 interface Props {
-    item: Item & { city_name: string };
+    item: ItemsResponse["items"][0];
 }
 
 export default function ItemCard(props: Props) {

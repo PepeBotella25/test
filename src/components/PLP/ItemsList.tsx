@@ -3,7 +3,7 @@ import ItemCard from "./ItemCard";
 import "./ItemsList.scss";
 
 interface Props {
-    items: (Item & { city_name: string })[];
+    items: ItemsResponse["items"];
 }
 
 export default function ItemsList(props: Props) {
