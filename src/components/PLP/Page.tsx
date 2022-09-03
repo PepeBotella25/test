@@ -3,6 +3,7 @@ import {useSearchParams} from "react-router-dom";
 import {useGetItemsQuery} from "../../services/Items";
 import BreadCrumb from "./BreadCrumb";
 import ItemsList from "./ItemsList";
+import Head from "../Head";
 
 export default function Page() {
     const [searchParams] = useSearchParams();
@@ -19,6 +20,9 @@ export default function Page() {
 
     return (
         <Fragment>
+            <Head>
+                <title>{`Buscar ${search}`}</title>
+            </Head>
             <BreadCrumb categoryId={categoryId}/>
             <ItemsList items={items} />
         </Fragment>
