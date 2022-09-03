@@ -1,13 +1,13 @@
-@import "../../styles/colors";
+@import "../../styles/variables";
 
 .itemCard {
-  font-size: 18px;
-  padding: 16px 16px 16px;
+  font-size: $fontM;
+  padding: $marginS $marginS $marginS;
   border-bottom: 1px solid $light-grey;
 
   .city {
     color: $grey;
-    font-size: 12px;
+    font-size: $fontXXS;
   }
 }
 
@@ -21,13 +21,13 @@
 
 .itemCardImg {
   border-radius: 4px;
-  margin-right: 16px;
+  margin-right: $marginS;
 }
 
 .itemCardPrice {
-  font-size: 24px;
-  padding-top: 16px;
-  padding-bottom: 32px;
+  font-size: $fontL;
+  padding-top: $marginS;
+  padding-bottom: $marginM;
 
   img {
     padding-left: 10px;

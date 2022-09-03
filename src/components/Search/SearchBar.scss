@@ -1,4 +1,4 @@
-@import "../../styles/colors";
+@import "../../styles/variables";
 
 .bar {
   background-color: $primary;
@@ -15,7 +15,7 @@
     border: none;
     border-radius: 2px 0 0 2px;
     color: $dark-grey;
-    font-size: 18px;
+    font-size: $fontM;
     height: 39px;
     margin-left: 50px;
     padding-top: 2px;
