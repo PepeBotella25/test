@@ -1,4 +1,4 @@
-export function classNames(...classes: (string | null | undefined)[]) {
+export function classNames(...classes: (string | false | null | undefined)[]) {
     return classes.filter(c => !!c).join(" ");
 }
 

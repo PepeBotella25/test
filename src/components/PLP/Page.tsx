@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import {useSearchParams} from "react-router-dom";
 import {useGetItemsQuery} from "../../services/Items";
 import BreadCrumb from "./BreadCrumb";
@@ -13,19 +13,19 @@ export default function Page() {
     const { items } = data || { items: [] };
 
     if(isLoading || !items.length) {
-        return <Fragment/>;
+        return <></>;
     }
 
     const categoryId = getPopularCategory(items.map(({ category_id }) => category_id));
 
     return (
-        <Fragment>
+        <>
             <Head>
                 <title>{`Buscar ${search}`}</title>
             </Head>
             <BreadCrumb categoryId={categoryId}/>
             <ItemsList items={items} />
-        </Fragment>
+        </>
     );
 }
 

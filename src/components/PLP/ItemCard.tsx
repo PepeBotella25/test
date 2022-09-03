@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import Row from "../ui/Row";
 import ShippingImg from "../../imgs/ic_shipping.png";
@@ -23,7 +23,7 @@ export default function ItemCard(props: Props) {
                 <div className={"itemCardDetails"}>
                     <Row className={"itemCardPrice"}>
                         <strong>{format(+[amount, decimals].join("."))}</strong>
-                        { free_shipping ? <img src={ShippingImg} alt={"free shipping"} width={"18px"} height={"18px"} /> : <Fragment/>}
+                        { free_shipping ? <img src={ShippingImg} alt={"free shipping"} width={"18px"} height={"18px"} /> : <></>}
                     </Row>
                     <div className={"title"}>{title}</div>
                 </div>

@@ -4,7 +4,7 @@ import {classNames} from "../../utils/Utils";
 
 interface Props {
     className?: string;
-    children: JSX.Element[] | JSX.Element;
+    children: ComponentChildren;
 }
 
 export default function Container(props: Props) {

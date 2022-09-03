@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import {useParams} from "react-router-dom";
 import {useGetItemQuery} from "../../services/Items";
 import ItemDetails from "./ItemDetails";
@@ -10,18 +10,18 @@ export default function Page() {
     const { data, isLoading } = useGetItemQuery({ id: id! });
 
     if(isLoading) {
-        return <Fragment/>;
+        return <></>;
     }
 
     const { item } = data!;
 
     return (
-        <Fragment>
+        <>
             <Head>
                 <title>{item.title}</title>
             </Head>
             <BreadCrumb categoryId={item.category_id}/>
             <ItemDetails item={item} />
-        </Fragment>
+        </>
     );
 }
