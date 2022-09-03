@@ -1,4 +1,11 @@
-.container {
-  margin: auto;
-  width: 1100px;
+@import "../../styles/variables";
+
+.content {
+  grid-area: content;
+}
+
+.containerGrid {
+  background-color: $light-grey;
+  grid-template-areas:
+          "LG . content content content content content content content content content content . RG";
 }

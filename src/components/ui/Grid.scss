@@ -1,0 +1,16 @@
+.grid {
+  --maxDesktop: 1820px;
+  --gutter: calc((100% - var(--maxDesktop)) / 2);
+
+  display: grid;
+  gap: 20px;
+  grid-template-columns: var(--gutter) repeat(12, 1fr) var(--gutter);
+
+  &::before {
+    grid-area: LG;
+  }
+
+  &::after {
+    grid-column: RG;
+  }
+}

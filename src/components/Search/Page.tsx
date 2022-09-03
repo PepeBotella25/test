@@ -13,9 +13,7 @@ export default function Page() {
                 </Head>
                 <SearchBar/>
             </header>
-            <Container>
-                <Outlet/>
-            </Container>
+            <Outlet/>
         </>
     );
 }

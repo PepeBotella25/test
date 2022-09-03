@@ -2,20 +2,28 @@
 
 .itemDetails {
   background-color: $white;
+  grid-template-areas:
+          "img img img img img img img img img details details details details details"
+          ". . . . . . . . . . . . . ."
+          "desc desc desc desc desc desc desc desc desc . . . . .";
   margin-top: $marginS;
-  padding: $marginM;
 
   span {
     color: $dark-grey;
   }
 
   img {
+    grid-area: img;
     border-radius: 4px;
+    margin-left: $marginM;
+    margin-top: $marginM;
   }
 
   .details {
+    grid-area: details;
     font-size: $fontXS;
-    margin-left: 20px;
+    padding-top: $marginM;
+    padding-right: $marginM;
   }
 
   .title {
@@ -36,7 +44,6 @@
     border-radius: 2px;
     color: $white;
     cursor: pointer;
-    margin-right: $marginM;
     margin-top: $marginM;
     padding: 10px;
     width: 100%;
@@ -46,7 +53,8 @@
 .itemDescription {
   color: $grey;
   font-size: $fontS;
-  margin-top: 100px;
+  grid-area: desc;
+  padding-left: $marginM;
 
   .title {
     color: $black;

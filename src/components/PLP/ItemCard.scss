@@ -1,17 +1,24 @@
 @import "../../styles/variables";
 
 .itemCard {
+  background-color: $white;
+  grid-template-areas:
+          "img img details details details details details details details details details city city city"
+          "img img details details details details details details details details details . . .";
   font-size: $fontM;
   padding: $marginS $marginS $marginS;
   border-bottom: 1px solid $light-grey;
 
   .city {
     color: $grey;
+    grid-area: city;
     font-size: $fontXXS;
+    padding-top: $marginS;
   }
 }
 
 .itemCardDetails {
+  grid-area: details;
   min-width: 700px;
 
   .title {
@@ -21,7 +28,7 @@
 
 .itemCardImg {
   border-radius: 4px;
-  margin-right: $marginS;
+  grid-area: img;
 }
 
 .itemCardPrice {

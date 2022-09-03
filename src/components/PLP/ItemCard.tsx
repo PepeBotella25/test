@@ -1,9 +1,9 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import Row from "../ui/Row";
 import ShippingImg from "../../imgs/ic_shipping.png";
 import "./ItemCard.scss";
 import {getCurrencyFormatter} from "../../utils/Utils";
+import Container from "../ui/Container";
 
 interface Props {
     item: ItemsResponse["items"][0];
@@ -18,17 +18,17 @@ export default function ItemCard(props: Props) {
 
     return (
         <Link to={`/items/${id}`}>
-            <Row className={"itemCard"}>
+            <Container className={"itemCard"}>
                 <img className={"itemCardImg"} src={picture} alt={`${title} image`} width={"180px"} height={"180px"}/>
                 <div className={"itemCardDetails"}>
-                    <Row className={"itemCardPrice"}>
+                    <div className={"itemCardPrice"}>
                         <strong>{format(+[amount, decimals].join("."))}</strong>
                         { free_shipping ? <img src={ShippingImg} alt={"free shipping"} width={"18px"} height={"18px"} /> : <></>}
-                    </Row>
+                    </div>
                     <div className={"title"}>{title}</div>
                 </div>
                 <div className={"city"}>{city_name}</div>
-            </Row>
+            </Container>
         </Link>
     );
 }

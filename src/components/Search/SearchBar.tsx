@@ -5,6 +5,7 @@ import {Link, useNavigate} from "react-router-dom";
 import "./SearchBar.scss";
 import Container from "../ui/Container";
 import Row from "../ui/Row";
+import Grid from "../ui/Grid";
 
 const ENTER_KEY = "Enter";
 
@@ -20,12 +21,14 @@ export default function SearchBar() {
     }
 
     return (
-        <Row className={"bar"}>
-            <Container className={"search"}>
+        <Grid className={"search"}>
+            <div className={"gridLogo"} >
                 <Link to={"/"}><img src={LogoImg} alt={"logo"}/></Link>
+            </div>
+            <div className={"gridSearch"}>
                 <input onKeyDown={(e) => e.key === ENTER_KEY && onClick()} ref={input} type={"text"} placeholder={"Nunca dejes de buscar"}/>
                 <button onClick={onClick}><img src={SearchImg} alt={"Search bar"}/></button>
-            </Container>
-        </Row>
+            </div>
+        </Grid>
     );
 }

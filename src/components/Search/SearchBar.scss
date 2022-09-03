@@ -1,11 +1,18 @@
 @import "../../styles/variables";
 
-.bar {
-  background-color: $primary;
+.gridLogo {
+  grid-area: logo;
+}
+
+.gridSearch {
+  grid-area: search;
 }
 
 .search {
+  background-color: $primary;
   padding: 8px;
+
+  grid-template-areas: "LG . logo search search search search search search search search search . RG";
 
   img {
     vertical-align: middle;
@@ -17,10 +24,9 @@
     color: $dark-grey;
     font-size: $fontM;
     height: 39px;
-    margin-left: 50px;
-    padding-top: 2px;
+    padding: 2px 0 2px 0;
     text-indent: 20px;
-    width: 86%;
+    width: 95%;
   }
 
   input:focus-visible {
@@ -33,8 +39,8 @@
     border-radius: 0 2px 2px 0;
     cursor: pointer;
     padding-top: 15px;
-    padding-bottom: 9px;
-    width: 46px;
+    padding-bottom: 10px;
+    width: 5%;
   }
 }
 

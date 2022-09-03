@@ -1,6 +1,7 @@
 import React from "react";
 import "./Container.scss";
 import {classNames} from "../../utils/Utils";
+import Grid from "./Grid";
 
 interface Props {
     className?: string;
@@ -10,8 +11,10 @@ interface Props {
 export default function Container(props: Props) {
     const { children, className } = props;
     return (
-        <div className={classNames("container", className)}>
-            {children}
-        </div>
+        <Grid className={"containerGrid"}>
+            <Grid className={classNames(className, "content")}>
+                {children}
+            </Grid>
+        </Grid>
     );
 }

@@ -1,8 +1,13 @@
 @import "../../styles/variables";
 
+.gridBreadcrumb {
+  grid-area: breadcrumb;
+}
+
 .breadcrumb {
   color: $grey;
   font-size: $fontXS;
+  grid-template-areas: "LG . breadcrumb breadcrumb breadcrumb breadcrumb breadcrumb breadcrumb breadcrumb breadcrumb breadcrumb breadcrumb . RG";
   padding-top: $marginS;
 
   .last {

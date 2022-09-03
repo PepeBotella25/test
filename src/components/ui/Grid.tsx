@@ -1,16 +1,17 @@
 import React from "react";
+import "./Grid.scss";
 import {classNames} from "../../utils/Utils";
-import "./Column.scss";
 
 interface Props {
     className?: string;
     children: ComponentChildren;
 }
 
-export default function Column(props: Props) {
-    const { children, className } = props;
+export default function Grid(props: Props) {
+    const { className, children } = props;
+
     return (
-        <div className={classNames("column", className)}>
+        <div className={classNames("grid", className)}>
             {children}
         </div>
     );
