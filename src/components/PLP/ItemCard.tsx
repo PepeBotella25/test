@@ -1,7 +1,6 @@
 import React, {Fragment} from "react";
 import {Link} from "react-router-dom";
 import Row from "../ui/Row";
-import Column from "../ui/Column";
 import ShippingImg from "../../imgs/ic_shipping.png";
 import "./ItemCard.scss";
 import {getCurrencyFormatter} from "../../utils/Utils";
@@ -21,13 +20,13 @@ export default function ItemCard(props: Props) {
         <Link to={`/items/${id}`}>
             <Row className={"itemCard"}>
                 <img className={"itemCardImg"} src={picture} alt={`${title} image`} width={"180px"} height={"180px"}/>
-                <Column className={"itemCardDetails"}>
+                <div className={"itemCardDetails"}>
                     <Row className={"itemCardPrice"}>
                         <strong>{format(+[amount, decimals].join("."))}</strong>
                         { free_shipping ? <img src={ShippingImg} alt={"free shipping"} width={"18px"} height={"18px"} /> : <Fragment/>}
                     </Row>
                     <div className={"title"}>{title}</div>
-                </Column>
+                </div>
                 <div className={"city"}>{city_name}</div>
             </Row>
         </Link>
