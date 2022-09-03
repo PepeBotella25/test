@@ -9,12 +9,11 @@ export default function Page() {
     const search = searchParams.get("search") || "";
 
     const { data, isLoading } = useGetItemsQuery({ search });
+    const { items } = data || { items: [] };
 
-    if(isLoading) {
+    if(isLoading || !items.length) {
         return <Fragment/>;
     }
-
-    const { items } = data!;
 
     const categoryId = getPopularCategory(items.map(({ category_id }) => category_id));
 
