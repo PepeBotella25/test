@@ -6,6 +6,8 @@ import "./SearchBar.scss";
 import Container from "../ui/Container";
 import Row from "../ui/Row";
 
+const ENTER_KEY = "Enter";
+
 export default function SearchBar() {
     const navigate = useNavigate();
     const input = useRef<HTMLInputElement>(null);
@@ -21,7 +23,7 @@ export default function SearchBar() {
         <Row className={"bar"}>
             <Container className={"search"}>
                 <Link to={"/"}><img src={LogoImg} alt={"logo"}/></Link>
-                <input ref={input} type={"text"} placeholder={"Nunca dejes de buscar"}/>
+                <input onKeyDown={(e) => e.key === ENTER_KEY && onClick()} ref={input} type={"text"} placeholder={"Nunca dejes de buscar"}/>
                 <button onClick={onClick}><img src={SearchImg} alt={"Search bar"}/></button>
             </Container>
         </Row>
