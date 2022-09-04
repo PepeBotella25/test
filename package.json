@@ -34,10 +34,9 @@
     "webpack-node-externals": "^3.0.0"
   },
   "scripts": {
-    "build:client": "webpack --mode=development --config=webpack.client.js --progress",
-    "build:server": "webpack --mode=development --config=webpack.server.js --progress",
-    "build": "npm run build:client && npm run build:server",
-    "start": "node ./dist/server.js"
+    "build": "webpack --mode=development --progress",
+    "start": "node ./dist/server.js",
+    "dev": "npm run build && npm run start"
   },
   "eslintConfig": {
     "extends": [
