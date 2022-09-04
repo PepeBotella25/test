@@ -9,7 +9,7 @@ import {getCategory} from "./api/CategoriesApiClient";
 import {routes, ServerRouter} from "../components/AppRoutes";
 import App from "../components/App";
 import {createStore} from "../store/Store";
-import {HelmetProvider} from "react-helmet-async";
+import {FilledContext, HelmetProvider, HelmetServerState} from "react-helmet-async";
 
 const PORT = 3000;
 const app = express();
@@ -18,12 +18,13 @@ const rootPath = path.join(__dirname, "..");
 
 const SSR_CONTENT_PLACEHOLDER = "<!-- SSR_CONTENT -->";
 const APP_STATE_PLACEHOLDER = "// _APP_STATE_";
+const HELMET_PLACEHOLDER = "<!-- HELMET -->";
 
-// Pages
+// Pages (SSR)
 routes.forEach(({ path, getServerData }) => {
     router.get(path, async (req, res) => {
         const store = createStore();
-        const helmetContext = {};
+        const helmetContext: FilledContext | {} = {};
 
         try {
             await getServerData?.(req, store);
@@ -39,10 +40,16 @@ routes.forEach(({ path, getServerData }) => {
             </ServerRouter>
         );
 
+        const { helmet } = helmetContext as FilledContext;
+        const head = (["title", "priority", "meta", "link", "script"] as (keyof HelmetServerState)[])
+            .map(key => helmet[key].toString())
+            .join("");
+
         res.send(
             framePage
                 .replace(SSR_CONTENT_PLACEHOLDER, content)
                 .replace(APP_STATE_PLACEHOLDER, `window.__APP_STORE__ = ${serialize(store.getState())}`)
+                .replace(HELMET_PLACEHOLDER, head)
         );
     });
 });
