@@ -5,5 +5,11 @@ const reducer = combineReducers({
     [baseApi.reducerPath]: baseApi.reducer
 });
 
-const store = configureStore({reducer});
-export default store;
+export type State = ReturnType<typeof reducer>;
+export type Store = ReturnType<typeof createStore>;
+
+export function createStore(preloadedState?: Partial<State>) {
+    return configureStore({ preloadedState, reducer });
+}
+
+
