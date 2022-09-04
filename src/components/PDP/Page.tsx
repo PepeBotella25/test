@@ -28,9 +28,26 @@ export default function Page() {
         <>
             <Head>
                 <title>{item.title}</title>
+                <script type="application/ld+json">{getProductJsonLd(item)}</script>
             </Head>
             <BreadCrumb categoryId={item.category_id}/>
             <ItemDetails item={item} />
         </>
     );
+}
+
+function getProductJsonLd(item: ItemResponse["item"]) {
+    const jsonLd = {
+        "@context": "https://www.schema.org",
+        "@type": "product",
+        name: item.title,
+        image: item.picture,
+        description: item.description,
+        offers: {
+            "@type": "Offer",
+            priceCurrency: item.price.currency,
+            price: item.price
+        }
+    };
+    return JSON.stringify(jsonLd);
 }
