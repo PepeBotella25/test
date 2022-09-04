@@ -1,22 +1,21 @@
-import express, {RequestHandler} from "express";
+import express from "express";
 import path from "path";
 import framePage from "./framePage.html";
 import {getItem, getItems} from "./api/ItemsApiClient";
 import {getCategory} from "./api/CategoriesApiClient";
+import {routes} from "../components/AppRoutes";
 
 const PORT = 3000;
 const app = express();
 const router = express.Router();
 const rootPath = path.join(__dirname, "..");
 
-const getFramePage: RequestHandler = (req, res) => {
-    res.send(framePage);
-};
-
 // Pages
-router.get("/", getFramePage);
-router.get("/items", getFramePage);
-router.get("/items/:id", getFramePage);
+routes.forEach(({ path }) => {
+    router.get(path, (req, res) => {
+        res.send(framePage);
+    });
+});
 
 // Api
 router.get("/api/items", async (req, res) => {

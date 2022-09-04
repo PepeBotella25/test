@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import App from './components/App';
 import {createStore, State} from "./store/Store";
+import { ClientRouter } from './components/AppRoutes';
+import {HelmetProvider} from "react-helmet-async";
 
 declare global {
     interface Window {
@@ -16,5 +18,11 @@ const root = ReactDOM.createRoot(
 
 const store = createStore(window.__APP_STORE__);
 
-root.render(<App store={store}/>);
+root.render(
+    <ClientRouter>
+        <HelmetProvider>
+            <App store={store}/>
+        </HelmetProvider>
+    </ClientRouter>
+);
 

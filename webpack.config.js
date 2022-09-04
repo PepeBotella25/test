@@ -15,17 +15,18 @@ const javascript = {
     exclude: /node_modules/,
     use: { loader: "babel-loader" }
 };
+const images = {
+    test: /\.png$/,
+    type: "asset/resource",
+    generator: { outputPath: "imgs", publicPath: "/static/imgs/" }
+};
 
 const clientConfig = {
     entry: { client: "./src/index.tsx" },
     output ,
     module: {
         rules: [
-            {
-                test: /\.png$/,
-                type: "asset/resource",
-                generator: { outputPath: "imgs", publicPath: "/static/imgs/" }
-            },
+            images,
             {
                 test: /\.s[ac]ss$/,
                 use: [
@@ -50,6 +51,14 @@ const serverConfig = {
     externals: [nodeExternals()],
     module: {
         rules: [
+            images,
+            {
+                test: /\.s[ac]ss$/,
+                use: [
+                    "css-loader",
+                    "sass-loader"
+                ]
+            },
             javascript,
             {
                 test: /\.html$/,
