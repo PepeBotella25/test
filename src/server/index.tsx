@@ -1,19 +1,49 @@
+import React from "react";
+import ReactDOM from "react-dom/server";
+import serialize from "serialize-javascript";
 import express from "express";
 import path from "path";
 import framePage from "./framePage.html";
 import {getItem, getItems} from "./api/ItemsApiClient";
 import {getCategory} from "./api/CategoriesApiClient";
-import {routes} from "../components/AppRoutes";
+import {routes, ServerRouter} from "../components/AppRoutes";
+import App from "../components/App";
+import {createStore} from "../store/Store";
+import {HelmetProvider} from "react-helmet-async";
 
 const PORT = 3000;
 const app = express();
 const router = express.Router();
 const rootPath = path.join(__dirname, "..");
 
+const SSR_CONTENT_PLACEHOLDER = "<!-- SSR_CONTENT -->";
+const APP_STATE_PLACEHOLDER = "// _APP_STATE_";
+
 // Pages
-routes.forEach(({ path }) => {
-    router.get(path, (req, res) => {
-        res.send(framePage);
+routes.forEach(({ path, getServerData }) => {
+    router.get(path, async (req, res) => {
+        const store = createStore();
+        const helmetContext = {};
+
+        try {
+            await getServerData?.(req, store);
+        } catch(error) {
+            console.error(error);
+        }
+
+        const content = ReactDOM.renderToString(
+            <ServerRouter location={req.url}>
+                <HelmetProvider context={helmetContext}>
+                    <App store={store} />
+                </HelmetProvider>
+            </ServerRouter>
+        );
+
+        res.send(
+            framePage
+                .replace(SSR_CONTENT_PLACEHOLDER, content)
+                .replace(APP_STATE_PLACEHOLDER, `window.__APP_STORE__ = ${serialize(store.getState())}`)
+        );
     });
 });
 

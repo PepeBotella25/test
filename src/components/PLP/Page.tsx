@@ -1,9 +1,19 @@
 import React from 'react';
 import {useSearchParams} from "react-router-dom";
-import {useGetItemsQuery} from "../../services/Items";
+import {serverGetItems, useGetItemsQuery} from "../../services/Items";
 import BreadCrumb from "./BreadCrumb";
 import ItemsList from "./ItemsList";
 import Head from "../Head";
+import {Store} from "../../store/Store";
+import {serverGetCategory} from "../../services/Categories";
+import {IncomingRequest} from "../AppRoutes";
+
+export async function getServerData(req: IncomingRequest, { dispatch }: Store) {
+    const { search } = req.query;
+    const { data } = await serverGetItems({ search: search as string }, dispatch);
+    const categoryId = getPopularCategory(data!.items.map(({ category_id }) => category_id));
+    await serverGetCategory({ id: categoryId }, dispatch);
+}
 
 export default function Page() {
     const [searchParams] = useSearchParams();

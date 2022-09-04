@@ -9,7 +9,11 @@ export type State = ReturnType<typeof reducer>;
 export type Store = ReturnType<typeof createStore>;
 
 export function createStore(preloadedState?: Partial<State>) {
-    return configureStore({ preloadedState, reducer });
+    return configureStore({
+        preloadedState,
+        reducer,
+        middleware: (getMiddleware) => getMiddleware().concat([baseApi.middleware])
+    });
 }
 
 

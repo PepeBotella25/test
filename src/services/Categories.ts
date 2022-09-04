@@ -1,4 +1,5 @@
 import baseApi from "../services/Services";
+import {Store} from "../store/Store";
 
 const CATEGORIES_URL = "/categories";
 
@@ -11,4 +12,8 @@ const categories = baseApi.injectEndpoints({
 });
 
 export const { useGetCategoryQuery } = categories;
-export default categories;
+
+export function serverGetCategory(args: { id: string }, dispatch: Store["dispatch"]) {
+    const { initiate } = categories.endpoints.getCategory;
+    return dispatch(initiate(args));
+}

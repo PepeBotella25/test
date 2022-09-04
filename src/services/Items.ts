@@ -1,4 +1,5 @@
 import baseApi from "../services/Services";
+import {Store} from "../store/Store";
 
 const ITEMS_URL = "/items";
 
@@ -14,4 +15,13 @@ const items = baseApi.injectEndpoints({
 });
 
 export const { useGetItemsQuery, useGetItemQuery } = items;
-export default items;
+
+export function serverGetItems(args: { search: string }, dispatch: Store["dispatch"]) {
+    const { initiate } = items.endpoints.getItems;
+    return dispatch(initiate(args));
+}
+
+export function serverGetItem(args: { id: string }, dispatch: Store["dispatch"]) {
+    const { initiate } = items.endpoints.getItem;
+    return dispatch(initiate(args));
+}
